@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Aladan Lazo - Portafolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -12,8 +16,27 @@
   <header class="hero">
     <div class="hero-content">
       <h1 class="title">Aladan Farid Sebastian Lazo Espinoza</h1>
-      <p class="subtitle">Desarrollador Fullstack Junior | Java | Spring Boot | SQL | React</p>
-      <a href="#proyectos" class="btn-primary">Ver Proyectos</a>
+      <p class="subtitle">Desarrollador Fullstack Junior</p>
+
+      <div class="hero-social">
+        <a href="https://github.com/Aladan2040" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        <a href="mailto:faridlazo1921@gmail.com" class="social-link" title="Email">
+          <i class="fas fa-envelope"></i>
+        </a>
+        <a href="https://linkedin.com/in/aladanlazo" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="tel:+51935127424" class="social-link" title="Teléfono">
+          <i class="fas fa-phone"></i>
+        </a>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
+        <a href="#sobre-mi" class="btn btn-secondary">Conoce más</a>
+      </div>
     </div>
   </header>
 
@@ -32,13 +55,72 @@
     <!-- ======== Habilidades ============= -->
     <section class="section" id="habilidades">
       <h2 class="section-title">Habilidades</h2>
-      <div class="grid">
-        <div class="card">Java / Spring Boot</div>
-        <div class="card">HTML / CSS / JavaScript</div>
-        <div class="card">React (Básico)</div>
-        <div class="card">MySQL / MongoDB</div>
-        <div class="card">Power BI</div>
-        <div class="card">Git / Postman</div>
+
+      <div class="grid skills-grid">
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="skill-icon" alt="Java" />
+          <p>Java</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" class="skill-icon" alt="Spring Boot" />
+          <p>Spring Boot</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="skill-icon" alt="HTML" />
+          <p>HTML</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="skill-icon" alt="CSS" />
+          <p>CSS</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="skill-icon" alt="JavaScript" />
+          <p>JavaScript</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="skill-icon" alt="React" />
+          <p>React</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" class="skill-icon" alt="Angular" />
+          <p>Angular</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="skill-icon" alt="MySQL" />
+          <p>MySQL</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original-wordmark.svg" class="skill-icon" alt="SQL Server" />
+          <p>SQL Server</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="skill-icon" alt="MongoDB" />
+          <p>MongoDB</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="skill-icon" alt="Git" />
+          <p>Git</p>
+        </div>
+
+        <div class="card skill-item">  
+          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" class="skill-icon" alt="Postman" />
+          <p>Postman</p>
+        </div>
+
+        <div class="card skill-item">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="skill-icon" alt="Power BI" />
+          <p>Power BI</p>
+        </div>
       </div>
     </section>
 
@@ -76,7 +158,7 @@
         </div>
 
         <div class="timeline-item">
-          <span class="timeline-date">20 – 24 Oct 2024</span>
+          <span class="timeline-date">20 – 24 Oct 2025</span>
           <div class="timeline-content">
             <h3>Certificado en Power BI</h3>
             <p>Curso intensivo de visualización de datos, DAX, modelado y dashboards.</p>
@@ -84,14 +166,6 @@
         </div>
 
       </div>
-    </section>
-
-    <!-- ======== Contacto ============= -->
-    <section class="section" id="contacto">
-      <h2 class="section-title">Contacto</h2>
-      <p><strong>Email:</strong> faridlazo1921@gmail.com</p>
-      <p><strong>Teléfono:</strong> +51 935 127 424</p>
-      <p><strong>LinkedIn:</strong> linkedin.com/in/aladanlazo</p>
     </section>
 
   </main>
