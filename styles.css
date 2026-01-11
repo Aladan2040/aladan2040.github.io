@@ -71,7 +71,7 @@ body {
   font-weight: 800;
   letter-spacing: -0.02em;
   margin: 0;
-  color: #0f172a; /* Darker text for title specifically */
+  color: #0f172a;
   line-height: 1.2;
 }
 
@@ -201,7 +201,7 @@ body {
 }
 
 /* ========================== */
-/* PROYECTOS (NUEVO)     */
+/* PROYECTOS (FIXED)     */
 /* ========================== */
 
 .grid {
@@ -230,17 +230,23 @@ body {
 
 .project-img-wrapper {
   width: 100%;
-  height: 200px;
+  height: 200px; /* Altura fija para el contenedor */
   background-color: var(--gray-light);
-  overflow: hidden;
+  overflow: hidden; /* Corta lo que sobre */
   border-bottom: 1px solid rgba(0,0,0,0.05);
+  position: relative;
 }
 
 .project-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  /* CRUCIAL: object-fit: cover evita que la imagen se estire. 
+     Actúa como una máscara de recorte. */
+  object-fit: cover; 
+  /* Alineación superior para que se vean las barras de navegación de tus apps */
+  object-position: top center; 
   transition: transform 0.5s ease;
+  display: block; /* Elimina espacios fantasma inline */
 }
 
 .card-project:hover .project-img {
@@ -315,7 +321,7 @@ body {
 /* ========================== */
 
 .skills-grid {
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Más compacto para iconos */
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
 }
 
 .skill-item {
@@ -329,13 +335,15 @@ body {
 }
 
 .skill-icon-lg {
-  font-size: 3rem; /* Icono más grande */
+  font-size: 3rem;
   width: 48px;
   height: 48px;
   margin-bottom: 5px;
   display: grid;
   place-items: center;
-  object-fit: contain;
+  /* CRUCIAL: Para iconos que son imágenes (Astro, etc), 
+     evita que se estiren si no son cuadrados */
+  object-fit: contain; 
 }
 
 .skill-name {
@@ -385,7 +393,7 @@ body {
   background: var(--primary);
   border-radius: 50%;
   position: absolute;
-  left: -39px; /* Adjust based on border + padding */
+  left: -39px;
   top: 6px;
   box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
@@ -489,7 +497,7 @@ body {
 [data-theme="dark"] {
   --bg: #0f172a;
   --text: #cbd5e1;
-  --dark: #f8fafc; /* Invertimos para títulos */
+  --dark: #f8fafc;
   --white: #1e293b;
   --gray-light: #334155;
   --card-shadow: rgba(0,0,0,0.4);
@@ -525,6 +533,6 @@ body {
 /* Responsive Navbar */
 @media (max-width: 768px) {
   .nav-links {
-    display: none; /* Simplificado para móvil */
+    display: none;
   }
 }
