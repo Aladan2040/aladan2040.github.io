@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aladan Lazo - Portafolio</title>
+  <title>Aladan Lazo - Portafolio Profesional</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- FontAwesome para iconos -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Devicon para iconos de tecnología -->
+  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
@@ -16,9 +19,9 @@
       <div class="brand">Aladan Lazo</div>
       <ul class="nav-links">
         <li><a href="#sobre-mi">Sobre mí</a></li>
+        <li><a href="#experiencia">Experiencia</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
-        <li><a href="#timeline">Timeline</a></li>
       </ul>
       <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
         <span class="icon">🌙</span>
@@ -30,7 +33,8 @@
   <header class="hero">
     <div class="hero-content">
       <h1 class="title">Aladan Farid Sebastian Lazo Espinoza</h1>
-      <p class="subtitle">Desarrollador Fullstack Junior</p>
+      <!-- Actualizado: Honestidad sobre el rol de practicante pero destacando las funciones -->
+      <p class="subtitle">Practicante de Desarrollo Full Stack & Coordinación TI</p>
 
       <div class="hero-social">
         <a href="https://github.com/Aladan2040" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
@@ -48,8 +52,8 @@
       </div>
 
       <div class="hero-actions">
-        <a href="#proyectos" class="btn btn-primary">Ver Proyectos</a>
-        <a href="#sobre-mi" class="btn btn-secondary">Conoce más</a>
+        <a href="#proyectos" class="btn btn-primary">Ver Portafolio</a>
+        <a href="#experiencia" class="btn btn-secondary">Mi Experiencia</a>
       </div>
     </div>
   </header>
@@ -60,123 +64,199 @@
     <section class="section" id="sobre-mi">
       <h2 class="section-title">Sobre mí</h2>
       <p class="section-text">
-        Soy egresado de Computación e Informática con enfoque en desarrollo web y software.
-        Manejo tecnologías backend como Java, Spring Boot y SQL, y también frameworks frontend como React.
-        Busco crecer profesionalmente construyendo soluciones prácticas, limpias y escalables.
+        Soy egresado de Computación e Informática apasionado por el desarrollo de software. 
+        Actualmente me desempeño como <strong>Practicante Full Stack</strong>, donde tengo la oportunidad de aplicar mis conocimientos en <strong>Java Spring Boot</strong>, <strong>PostgreSQL</strong> y <strong>React</strong> en entornos productivos reales.
+        <br><br>
+        A pesar de mi etapa formativa, la empresa ha confiado en mí para asumir el rol de <strong>Coordinador de Practicantes TI</strong>, permitiéndome liderar el avance del área, supervisar a nuevos ingresos y gestionar la entrega de proyectos de software empresarial.
       </p>
     </section>
 
-    <!-- ======== Proyectos ============= -->
-    <section class="section" id="proyectos">
-      <h2 class="section-title">Proyectos</h2>
-      <div class="grid">
-        <div class="card card-project">
-          <h3 class="project-title">Sistema de Gestión de Ventas</h3>
-          <p>Fullstack con Java, Spring Boot, SQL y HTML/CSS. CRUD completo y reportes.</p>
-        </div>
-        <div class="card card-project">
-          <h3 class="project-title">API REST de Pedidos</h3>
-          <p>API completa con endpoints, validaciones y pruebas en Postman.</p>
-        </div>
-        <div class="card card-project">
-          <h3 class="project-title">Dashboard de Ventas</h3>
-          <p>Análisis de datos empresarial con Power BI.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== Habilidades ============= -->
-    <section class="section" id="habilidades">
-      <h2 class="section-title">Habilidades</h2>
-
-      <div class="grid skills-grid">
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" class="skill-icon" alt="Java" />
-          <p>Java</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/spring/spring-original.svg" class="skill-icon" alt="Spring Boot" />
-          <p>Spring Boot</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" class="skill-icon" alt="HTML" />
-          <p>HTML</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" class="skill-icon" alt="CSS" />
-          <p>CSS</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" class="skill-icon" alt="JavaScript" />
-          <p>JavaScript</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" class="skill-icon" alt="React" />
-          <p>React</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/angular/angular-original.svg" class="skill-icon" alt="Angular" />
-          <p>Angular</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" class="skill-icon" alt="MySQL" />
-          <p>MySQL</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/microsoftsqlserver/microsoftsqlserver-original-wordmark.svg" class="skill-icon" alt="SQL Server" />
-          <p>SQL Server</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" class="skill-icon" alt="MongoDB" />
-          <p>MongoDB</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" class="skill-icon" alt="Git" />
-          <p>Git</p>
-        </div>
-
-        <div class="card skill-item">  
-          <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/postman/postman-original.svg" class="skill-icon" alt="Postman" />
-          <p>Postman</p>
-        </div>
-
-        <div class="card skill-item">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="skill-icon" alt="Power BI" />
-          <p>Power BI</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ======== Línea de Tiempo ============= -->
-    <section class="section" id="timeline">
-      <h2 class="section-title">Línea de Tiempo</h2>
+    <!-- ======== Línea de Tiempo (Experiencia) ============= -->
+    <section class="section" id="experiencia">
+      <h2 class="section-title">Experiencia & Formación</h2>
 
       <div class="timeline">
 
+        <!-- Nuevo ítem: Prácticas y Coordinación -->
         <div class="timeline-item">
-          <span class="timeline-date">Mar 2022 – Sep 2025</span>
+          <span class="timeline-date">18 Nov 2025 – Presente</span>
           <div class="timeline-content">
-            <h3>Carrera de Computación e Informática</h3>
-            <p>Formación en Cibertec (Bellavista). Desarrollo web, bases de datos y software empresarial.</p>
+            <h3>Practicante Full Stack & Coordinador TI</h3>
+            <p>
+              Responsable del ciclo de vida completo de aplicaciones internas (DB, Backend, Frontend) dentro de mis prácticas profesionales.
+              <br>
+              <strong>Stack:</strong> PostgreSQL, Java Spring Boot, React + Vite, Astro.
+              <br>
+              <strong>Logro Adicional:</strong> Debido a mi desempeño, fui designado para coordinar el área de TI, supervisando las tareas y el avance de otros practicantes del equipo.
+            </p>
           </div>
         </div>
 
         <div class="timeline-item">
           <span class="timeline-date">20 – 24 Oct 2025</span>
           <div class="timeline-content">
-            <h3>Certificado en Power BI</h3>
-            <p>Curso intensivo de visualización de datos, DAX, modelado y dashboards.</p>
+            <h3>Certificación en Power BI</h3>
+            <p>Curso intensivo especializado en visualización de datos, modelado y creación de dashboards para inteligencia de negocios.</p>
           </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-date">Mar 2022 – Sep 2025</span>
+          <div class="timeline-content">
+            <h3>Carrera de Computación e Informática</h3>
+            <p>Cibertec (Bellavista). Formación sólida en fundamentos de programación, bases de datos relacionales y arquitectura de software.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======== Proyectos ============= -->
+    <section class="section" id="proyectos">
+      <h2 class="section-title">Proyectos Destacados</h2>
+      <div class="grid">
+        
+        <!-- Proyecto 1: Sistema Principal -->
+        <div class="card card-project">
+          <div class="project-img-wrapper">
+             <img src="assets/sistemalogistico.png" alt="Sistema Full Stack" class="project-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x350/3b82f6/ffffff?text=Sistema+ERP+FullStack';" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Sistema de Gestión Empresarial</h3>
+            <p>Aplicación desarrollada durante mis prácticas. Backend robusto con <strong>Java Spring Boot</strong> y <strong>PostgreSQL</strong>. Frontend reactivo con <strong>React + Vite</strong>.</p>
+            <div class="project-tags">
+              <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>React + Vite</span><span>JavaScript</span>
+            </div>
+            <div class="project-links">
+              <span class="status-badge"><i class="fas fa-building"></i> Proyecto Empresarial (Prácticas)</span>
+            </div>
+          </div>
+        </div>
+
+       
+
+        <!-- Proyecto 3: Trabajo LandingPage Pestañas -->
+        <div class="card card-project">
+          <div class="project-img-wrapper">
+             <img src="assets/evolvelashes.png" alt="evolvelashes" class="project-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x350/f59e0b/ffffff?text=evolvelashes';" />
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">Landing Page de servicio de Pestañas</h3>
+            <p>Trabajo realizado para un servicio de extensión de pestañas, enfocado en diseño atractivo y funcionalidad.</p>
+            <div class="project-tags">
+              <span>Astro</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+            </div>
+            <div class="project-links">
+               <span class="status-badge">Análisis de Datos</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ======== Habilidades (BADGES) ============= -->
+    <section class="section" id="habilidades">
+      <h2 class="section-title">Stack Tecnológico</h2>
+
+      <!-- Grupo 1: Backend & Base de Datos -->
+      <h3 class="category-title">Backend & Base de Datos</h3>
+      <div class="grid skills-grid">
+        
+        <div class="card skill-item">
+          <i class="devicon-java-plain colored skill-icon-lg"></i>
+          <span class="skill-name">Java</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-spring-original colored skill-icon-lg"></i>
+          <span class="skill-name">Spring Boot</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-postgresql-plain colored skill-icon-lg"></i>
+          <span class="skill-name">PostgreSQL</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-mysql-plain colored skill-icon-lg"></i>
+          <span class="skill-name">SQL / MySQL</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+      </div>
+
+      <!-- Grupo 2: Frontend & Web -->
+      <h3 class="category-title" style="margin-top: 30px;">Frontend & Web</h3>
+      <div class="grid skills-grid">
+        
+        <div class="card skill-item">
+          <i class="devicon-javascript-plain colored skill-icon-lg"></i>
+          <span class="skill-name">JavaScript</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-react-original colored skill-icon-lg"></i>
+          <span class="skill-name">React + Vite</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+           <!-- Icono Astro (Imagen externa) -->
+           <img src="https://astro.build/assets/press/astro-icon-dark.svg" class="skill-icon-lg" alt="Astro" style="padding: 5px;" />
+          <span class="skill-name">Astro</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-typescript-plain colored skill-icon-lg"></i>
+          <span class="skill-name">TypeScript</span>
+          <span class="badge-level level-basico">Básico</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-html5-plain colored skill-icon-lg"></i>
+          <span class="skill-name">HTML5</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-css3-plain colored skill-icon-lg"></i>
+          <span class="skill-name">CSS3</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+      </div>
+
+      <!-- Grupo 3: Herramientas & Otros -->
+      <h3 class="category-title" style="margin-top: 30px;">Herramientas & Otros</h3>
+      <div class="grid skills-grid">
+
+        <div class="card skill-item">
+          <i class="devicon-git-plain colored skill-icon-lg"></i>
+          <span class="skill-name">Git & GitHub</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="devicon-postman-plain colored skill-icon-lg"></i>
+          <span class="skill-name">Postman</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+           <!-- Icono Power BI -->
+           <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="skill-icon-lg" alt="Power BI" />
+          <span class="skill-name">Power BI</span>
+          <span class="badge-level level-intermedio">Intermedio</span>
+        </div>
+
+        <div class="card skill-item">
+          <i class="fas fa-users-cog skill-icon-lg" style="color: var(--primary);"></i>
+          <span class="skill-name">Liderazgo (Rol Practicante)</span>
+          <span class="badge-level level-intermedio">Experiencia Real</span>
         </div>
 
       </div>
@@ -185,31 +265,40 @@
   </main>
 
   <footer class="footer">
-    <p>© Aladan Lazo — Portafolio Profesional</p>
+    <p>© 2026 Aladan Lazo — Portafolio Profesional</p>
   </footer>
+
   <script>
     (function() {
       const root = document.documentElement;
       const toggleBtn = document.getElementById('themeToggle');
       const iconSpan = toggleBtn.querySelector('.icon');
       const stored = localStorage.getItem('theme');
-      if (stored === 'dark') {
-        root.setAttribute('data-theme', 'dark');
-        iconSpan.textContent = '☀️';
-      } else {
-        iconSpan.textContent = '🌙';
+      
+      // Función para aplicar tema
+      function setTheme(isDark) {
+        if (isDark) {
+          root.setAttribute('data-theme', 'dark');
+          iconSpan.textContent = '☀️';
+          localStorage.setItem('theme', 'dark');
+        } else {
+          root.removeAttribute('data-theme');
+          iconSpan.textContent = '🌙';
+          localStorage.setItem('theme', 'light');
+        }
       }
+
+      // Check inicial
+      if (stored === 'dark') {
+        setTheme(true);
+      } else {
+        setTheme(false);
+      }
+
+      // Event Listener
       toggleBtn.addEventListener('click', function() {
         const isDark = root.getAttribute('data-theme') === 'dark';
-        if (isDark) {
-          root.removeAttribute('data-theme');
-          localStorage.setItem('theme', 'light');
-          iconSpan.textContent = '🌙';
-        } else {
-          root.setAttribute('data-theme', 'dark');
-          localStorage.setItem('theme', 'dark');
-          iconSpan.textContent = '☀️';
-        }
+        setTheme(!isDark);
       });
     })();
   </script>
