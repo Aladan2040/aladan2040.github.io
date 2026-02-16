@@ -46,7 +46,7 @@ body {
   background: var(--bg);
   color: var(--text);
   line-height: 1.7;
-  padding-top: 72px;
+  padding-top: 0;
   transition: background-color 0.4s ease, color 0.4s ease;
   -webkit-font-smoothing: antialiased;
 }
@@ -86,23 +86,30 @@ img {
 /*  NAVBAR                                       */
 /* ============================================= */
 
+
 .navbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background: var(--surface-glass);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
-  transition: var(--transition);
+  transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), background 0.3s ease, box-shadow 0.3s ease;
+  transform: translateY(-100%);
+  /* Hidden by default */
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
 }
 
 .navbar.scrolled {
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(0);
+  /* Visible on scroll */
 }
+
+/* Dark mode adjustment for navbar bg is handled in theme section */
+
 
 .nav-inner {
   max-width: 1140px;
