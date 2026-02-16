@@ -1,262 +1,436 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aladan Lazo - Portafolio Profesional</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <!-- FontAwesome para iconos -->
+  <title>Aladan Lazo — Full Stack Developer & Coordinador TI</title>
+  <meta name="description"
+    content="Portafolio profesional de Aladan Lazo. Desarrollador Full Stack especializado en Java Spring Boot, React y PostgreSQL." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-  <!-- Devicon para iconos de tecnología -->
-  <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-  <nav class="navbar">
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- ========== Navbar ========== -->
+  <nav class="navbar" id="navbar">
     <div class="nav-inner">
-      <div class="brand">Aladan Lazo</div>
-      <ul class="nav-links">
+      <a href="#" class="brand">
+        <span class="brand-icon">&lt;/&gt;</span> Aladan<span class="brand-accent">Lazo</span>
+      </a>
+      <ul class="nav-links" id="navLinks">
         <li><a href="#sobre-mi">Sobre mí</a></li>
         <li><a href="#experiencia">Experiencia</a></li>
         <li><a href="#proyectos">Proyectos</a></li>
         <li><a href="#habilidades">Habilidades</a></li>
       </ul>
-      <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
-        <span class="icon">🌙</span>
-      </button>
+      <div class="nav-right">
+        <button id="themeToggle" class="theme-toggle" aria-label="Cambiar tema">
+          <i class="fas fa-moon" id="themeIcon"></i>
+        </button>
+        <button class="hamburger" id="hamburger" aria-label="Menú">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
     </div>
   </nav>
 
-  <!-- ========== Hero =========== -->
-  <header class="hero">
+  <!-- ========== Hero ========== -->
+  <header class="hero" id="hero">
+    <canvas id="heroCanvas"></canvas>
     <div class="hero-content">
-      <h1 class="title">Aladan Farid Sebastian Lazo Espinoza</h1>
-      <!-- Actualizado: Honestidad sobre el rol de practicante pero destacando las funciones -->
-      <p class="subtitle">Practicante de Desarrollo Full Stack & Coordinación TI</p>
-
+      <div class="hero-badge">
+        <span class="badge-dot"></span> Disponible para nuevos proyectos
+      </div>
+      <h1 class="hero-title">
+        <span class="hero-greeting">Hola, soy</span>
+        <span class="hero-name glitch-text" data-text="Aladan Lazo">Aladan Lazo</span>
+      </h1>
+      <p class="hero-subtitle">
+        <span class="typing-prefix">&gt; </span><span id="typingText"></span><span class="typing-cursor">_</span>
+      </p>
       <div class="hero-social">
-        <a href="https://github.com/Aladan2040" target="_blank" rel="noopener noreferrer" class="social-link" title="GitHub">
-          <i class="fab fa-github"></i>
-        </a>
-        <a href="mailto:faridlazo1921@gmail.com" class="social-link" title="Email">
-          <i class="fas fa-envelope"></i>
-        </a>
-        <a href="https://linkedin.com/in/aladanlazo" target="_blank" rel="noopener noreferrer" class="social-link" title="LinkedIn">
-          <i class="fab fa-linkedin"></i>
-        </a>
-        <a href="tel:+51935127424" class="social-link" title="Teléfono">
-          <i class="fas fa-phone"></i>
-        </a>
+        <a href="https://github.com/Aladan2040" target="_blank" rel="noopener noreferrer" class="social-link glow-hover"
+          title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="mailto:faridlazo1921@gmail.com" class="social-link glow-hover" title="Email"><i
+            class="fas fa-envelope"></i></a>
+        <a href="https://linkedin.com/in/aladanlazo" target="_blank" rel="noopener noreferrer"
+          class="social-link glow-hover" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="tel:+51935127424" class="social-link glow-hover" title="Teléfono"><i class="fas fa-phone"></i></a>
       </div>
-
       <div class="hero-actions">
-        <a href="#proyectos" class="btn btn-primary">Ver Portafolio</a>
-        <a href="#experiencia" class="btn btn-secondary">Mi Experiencia</a>
+        <a href="#proyectos" class="btn btn-primary glow-hover"><i class="fas fa-briefcase"></i> Ver Portafolio</a>
+        <a href="CV_AladanLazo.pdf" download class="btn btn-secondary"><i class="fas fa-download"></i> Descargar CV</a>
       </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-arrow"><i class="fas fa-chevron-down"></i></div>
     </div>
   </header>
 
-  <main class="container">
+  <main>
 
-    <!-- ======== Sobre Mi ============= -->
+    <!-- ========== Sobre Mí ========== -->
     <section class="section" id="sobre-mi">
-      <h2 class="section-title">Sobre mí</h2>
-      <p class="section-text">
-        Soy egresado de Computación e Informática apasionado por el desarrollo de software. 
-        Actualmente me desempeño como <strong>Practicante Full Stack</strong>, donde tengo la oportunidad de aplicar mis conocimientos en <strong>Java Spring Boot</strong>, <strong>PostgreSQL</strong> y <strong>React</strong> en entornos productivos reales.
-        <br><br>
-        A pesar de mi etapa formativa, la empresa ha confiado en mí para asumir el rol de <strong>Coordinador de Practicantes TI</strong>, permitiéndome liderar el avance del área, supervisar a nuevos ingresos y gestionar la entrega de proyectos de software empresarial.
-      </p>
-    </section>
-
-    <!-- ======== Línea de Tiempo (Experiencia) ============= -->
-    <section class="section" id="experiencia">
-      <h2 class="section-title">Experiencia & Formación</h2>
-
-      <div class="timeline">
-
-        <!-- Nuevo ítem: Prácticas y Coordinación -->
-        <div class="timeline-item">
-          <span class="timeline-date">18 Nov 2025 – Presente</span>
-          <div class="timeline-content">
-            <h3>Practicante Full Stack & Coordinador TI</h3>
-            <p>
-              Responsable del ciclo de vida completo de aplicaciones internas (DB, Backend, Frontend) dentro de mis prácticas profesionales.
-              <br>
-              <strong>Stack:</strong> PostgreSQL, Java Spring Boot, React + Vite, Astro.
-              <br>
-              <strong>Logro Adicional:</strong> Debido a mi desempeño, fui designado para coordinar el área de TI, supervisando las tareas y el avance de otros practicantes del equipo.
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label"><i class="fas fa-terminal"></i> whoami</span>
+          <h2 class="section-title glitch-hover">Sobre mí</h2>
+        </div>
+        <div class="about-grid">
+          <div class="about-card glass-card reveal">
+            <p class="about-text">
+              Soy egresado de <strong>Computación e Informática</strong> apasionado por el desarrollo de software.
+              Actualmente me desempeño como <strong>Practicante Full Stack</strong>, donde aplico
+              mis conocimientos en <strong>Java Spring Boot</strong>, <strong>PostgreSQL</strong> y
+              <strong>React</strong>
+              en entornos productivos reales.
+            </p>
+            <p class="about-text">
+              La empresa ha confiado en mí para asumir el rol de
+              <strong>Coordinador de Practicantes TI</strong>, permitiéndome liderar el avance del área,
+              supervisar a nuevos ingresos y gestionar la entrega de proyectos de software empresarial.
             </p>
           </div>
-        </div>
-
-        <div class="timeline-item">
-          <span class="timeline-date">20 – 24 Oct 2025</span>
-          <div class="timeline-content">
-            <h3>Certificación en Power BI</h3>
-            <p>Curso intensivo especializado en visualización de datos, modelado y creación de dashboards para inteligencia de negocios.</p>
+          <div class="about-stats">
+            <div class="stat-card glass-card reveal">
+              <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Proyectos Completados</span>
+            </div>
+            <div class="stat-card glass-card reveal">
+              <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Tecnologías Dominadas</span>
+            </div>
+            <div class="stat-card glass-card reveal">
+              <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
+              <span class="stat-label">Meses de Experiencia</span>
+            </div>
           </div>
         </div>
-
-        <div class="timeline-item">
-          <span class="timeline-date">Mar 2022 – Sep 2025</span>
-          <div class="timeline-content">
-            <h3>Carrera de Computación e Informática</h3>
-            <p>Cibertec (Bellavista). Formación sólida en fundamentos de programación, bases de datos relacionales y arquitectura de software.</p>
-          </div>
-        </div>
-
       </div>
     </section>
 
-    <!-- ======== Proyectos ============= -->
+    <!-- ========== Experiencia ========== -->
+    <section class="section" id="experiencia">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label"><i class="fas fa-code-branch"></i> git log</span>
+          <h2 class="section-title glitch-hover">Experiencia & Formación</h2>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item reveal-left">
+            <div class="timeline-marker"><i class="fas fa-code"></i></div>
+            <div class="timeline-content glass-card">
+              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Nov 2025 – Presente</span>
+              <h3>Practicante Full Stack & Coordinador TI</h3>
+              <p>Responsable del ciclo de vida completo de aplicaciones internas (DB, Backend, Frontend).</p>
+              <div class="timeline-tags">
+                <span class="float-tag">PostgreSQL</span><span class="float-tag">Spring Boot</span><span
+                  class="float-tag">React + Vite</span><span class="float-tag">Astro</span>
+              </div>
+              <div class="timeline-achievement">
+                <i class="fas fa-trophy"></i>
+                Designado como Coordinador TI por desempeño destacado.
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item reveal-left">
+            <div class="timeline-marker"><i class="fas fa-chart-bar"></i></div>
+            <div class="timeline-content glass-card">
+              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Oct 2025</span>
+              <h3>Certificación en Power BI</h3>
+              <p>Curso intensivo en visualización de datos, modelado y dashboards para BI.</p>
+              <div class="timeline-tags">
+                <span class="float-tag">Power BI</span><span class="float-tag">Análisis de Datos</span><span
+                  class="float-tag">Dashboards</span>
+              </div>
+            </div>
+          </div>
+          <div class="timeline-item reveal-left">
+            <div class="timeline-marker"><i class="fas fa-graduation-cap"></i></div>
+            <div class="timeline-content glass-card">
+              <span class="timeline-date"><i class="fas fa-calendar-alt"></i> Mar 2022 – Sep 2025</span>
+              <h3>Computación e Informática</h3>
+              <p>Cibertec (Bellavista). Formación sólida en programación, bases de datos y arquitectura de software.</p>
+              <div class="timeline-tags">
+                <span class="float-tag">Programación</span><span class="float-tag">Bases de Datos</span><span
+                  class="float-tag">Arquitectura</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Proyectos ========== -->
     <section class="section" id="proyectos">
-      <h2 class="section-title">Proyectos Destacados</h2>
-      <div class="grid">
-        
-        <!-- Proyecto 1: Sistema Principal -->
-        <div class="card card-project">
-          <div class="project-img-wrapper">
-             <img src="assets/sistemalogistico.png" alt="Sistema Full Stack" class="project-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x350/3b82f6/ffffff?text=Sistema+ERP+FullStack';" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Sistema de Gestión Empresarial</h3>
-            <p>Aplicación desarrollada durante mis prácticas. Backend robusto con <strong>Java Spring Boot</strong> y <strong>PostgreSQL</strong>. Frontend reactivo con <strong>React + Vite</strong>.</p>
-            <div class="project-tags">
-              <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>React + Vite</span><span>JavaScript</span>
-            </div>
-            <div class="project-links">
-              <span class="status-badge"><i class="fas fa-building"></i> Proyecto Empresarial (Prácticas)</span>
-            </div>
-          </div>
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label"><i class="fas fa-folder-open"></i> ls projects/</span>
+          <h2 class="section-title glitch-hover">Proyectos Destacados</h2>
         </div>
+        <div class="projects-grid">
 
-       
+          <!-- Project 1 -->
+          <div class="project-card magnetic-card reveal" data-modal="modal-1">
+            <div class="project-img-wrapper">
+              <img src="assets/sistemalogistico.png" alt="Sistema de Gestión Empresarial" class="project-img"
+                onerror="this.onerror=null;this.src='https://via.placeholder.com/600x350/2563eb/ffffff?text=Sistema+ERP';" />
+              <div class="project-overlay">
+                <span class="project-overlay-icon"><i class="fas fa-expand"></i></span>
+                <span class="project-overlay-text">Ver Detalles</span>
+              </div>
+            </div>
+            <div class="project-body">
+              <h3 class="project-title">Sistema de Gestión Empresarial</h3>
+              <div class="project-tags">
+                <span class="float-tag">Java</span><span class="float-tag">Spring Boot</span><span
+                  class="float-tag">PostgreSQL</span><span class="float-tag">React</span>
+              </div>
+            </div>
+          </div>
 
-        <!-- Proyecto 3: Trabajo LandingPage Pestañas -->
-        <div class="card card-project">
-          <div class="project-img-wrapper">
-             <img src="assets/evolvelashes.png" alt="evolvelashes" class="project-img" onerror="this.onerror=null;this.src='https://via.placeholder.com/600x350/f59e0b/ffffff?text=evolvelashes';" />
-          </div>
-          <div class="project-content">
-            <h3 class="project-title">Landing Page de servicio de Pestañas</h3>
-            <p>Trabajo realizado para un servicio de extensión de pestañas, enfocado en diseño atractivo y funcionalidad.</p>
-            <div class="project-tags">
-              <span>Astro</span><span>HTML</span><span>CSS</span><span>JavaScript</span>
+          <!-- Project 2 -->
+          <div class="project-card magnetic-card reveal" data-modal="modal-2">
+            <div class="project-img-wrapper">
+              <img
+                src="https://api.microlink.io/?url=https%3A%2F%2Fevolve-lashes.vercel.app&screenshot=true&meta=false&embed=screenshot.url"
+                alt="EvolveLashes" class="project-img"
+                onerror="this.onerror=null;this.src='assets/evolvelashes.png';" />
+              <div class="project-overlay">
+                <span class="project-overlay-icon"><i class="fas fa-expand"></i></span>
+                <span class="project-overlay-text">Ver Detalles</span>
+              </div>
             </div>
-            <div class="project-links">
-               <span class="status-badge">Análisis de Datos</span>
+            <div class="project-body">
+              <h3 class="project-title">Landing Page — EvolveLashes</h3>
+              <div class="project-tags">
+                <span class="float-tag">Astro</span><span class="float-tag">HTML5</span><span
+                  class="float-tag">CSS3</span><span class="float-tag">JavaScript</span>
+              </div>
             </div>
           </div>
+
         </div>
-
       </div>
     </section>
 
-    <!-- ======== Habilidades (BADGES) ============= -->
+    <!-- ===== Project Modals ===== -->
+    <div class="modal-overlay" id="modal-1">
+      <div class="modal-content glass-card">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <div class="modal-grid">
+          <div class="modal-img-wrap">
+            <img src="assets/sistemalogistico.png" alt="Sistema ERP" class="modal-img"
+              onerror="this.onerror=null;this.src='https://via.placeholder.com/800x500/2563eb/ffffff?text=Sistema+ERP';" />
+          </div>
+          <div class="modal-info">
+            <span class="modal-badge"><i class="fas fa-building"></i> Proyecto Empresarial</span>
+            <h3>Sistema de Gestión Empresarial</h3>
+            <p>Aplicación full stack desarrollada durante mis prácticas profesionales. Gestión de módulos logísticos,
+              inventario y operaciones empresariales con arquitectura robusta.</p>
+            <div class="modal-stack">
+              <h4><i class="fas fa-layer-group"></i> Stack Tecnológico</h4>
+              <div class="modal-tags">
+                <span>Java</span><span>Spring Boot</span><span>PostgreSQL</span><span>React +
+                  Vite</span><span>JavaScript</span><span>REST API</span>
+              </div>
+            </div>
+            <div class="modal-role">
+              <h4><i class="fas fa-user-tie"></i> Mi Rol</h4>
+              <p>Desarrollador Full Stack — Diseño de base de datos, endpoints REST, y desarrollo completo del frontend
+                reactivo.</p>
+            </div>
+            <div class="modal-actions">
+              <span class="modal-status"><i class="fas fa-lock"></i> Repositorio Privado (Empresa)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-2">
+      <div class="modal-content glass-card">
+        <button class="modal-close"><i class="fas fa-times"></i></button>
+        <div class="modal-grid">
+          <div class="modal-img-wrap">
+            <img
+              src="https://api.microlink.io/?url=https%3A%2F%2Fevolve-lashes.vercel.app&screenshot=true&meta=false&embed=screenshot.url"
+              alt="EvolveLashes" class="modal-img" onerror="this.onerror=null;this.src='assets/evolvelashes.png';" />
+          </div>
+          <div class="modal-info">
+            <span class="modal-badge"><i class="fas fa-globe"></i> Proyecto Web</span>
+            <h3>Landing Page — EvolveLashes</h3>
+            <p>Landing page profesional para un servicio de extensiones de pestañas a domicilio en Lima. Enfocada en
+              diseño premium, experiencia de usuario y conversión.</p>
+            <div class="modal-stack">
+              <h4><i class="fas fa-layer-group"></i> Stack Tecnológico</h4>
+              <div class="modal-tags">
+                <span>Astro</span><span>HTML5</span><span>CSS3</span><span>JavaScript</span><span>Responsive
+                  Design</span>
+              </div>
+            </div>
+            <div class="modal-role">
+              <h4><i class="fas fa-user-tie"></i> Mi Rol</h4>
+              <p>Desarrollo completo — Diseño UI/UX, maquetación responsive, animaciones y deploy.</p>
+            </div>
+            <div class="modal-actions">
+              <a href="https://evolve-lashes.vercel.app/" target="_blank" rel="noopener noreferrer"
+                class="btn btn-primary glow-hover">
+                <i class="fas fa-external-link-alt"></i> Ver Proyecto en Vivo
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== Habilidades ========== -->
     <section class="section" id="habilidades">
-      <h2 class="section-title">Stack Tecnológico</h2>
-
-      <!-- Grupo 1: Backend & Base de Datos -->
-      <h3 class="category-title">Backend & Base de Datos</h3>
-      <div class="grid skills-grid">
-        
-        <div class="card skill-item">
-          <i class="devicon-java-plain colored skill-icon-lg"></i>
-          <span class="skill-name">Java</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-label"><i class="fas fa-microchip"></i> cat skills.json</span>
+          <h2 class="section-title glitch-hover">Stack Tecnológico</h2>
         </div>
 
-        <div class="card skill-item">
-          <i class="devicon-spring-original colored skill-icon-lg"></i>
-          <span class="skill-name">Spring Boot</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
+        <div class="skills-category reveal">
+          <h3 class="category-title"><i class="fas fa-server"></i> Backend & Base de Datos</h3>
+          <div class="skills-grid">
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-java-plain colored"></i></div>
+              <span class="skill-name">Java</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año y 6 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-spring-original colored"></i></div>
+              <span class="skill-name">Spring Boot</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año y 3 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-postgresql-plain colored"></i></div>
+              <span class="skill-name">PostgreSQL</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 6 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-mysql-plain colored"></i></div>
+              <span class="skill-name">SQL / MySQL</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año</span>
+            </div>
+          </div>
         </div>
 
-        <div class="card skill-item">
-          <i class="devicon-postgresql-plain colored skill-icon-lg"></i>
-          <span class="skill-name">PostgreSQL</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
+        <div class="skills-category reveal">
+          <h3 class="category-title"><i class="fas fa-palette"></i> Frontend & Web</h3>
+          <div class="skills-grid">
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-javascript-plain colored"></i></div>
+              <span class="skill-name">JavaScript</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 8 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-react-original colored"></i></div>
+              <span class="skill-name">React + Vite</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 5 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><img src="https://astro.build/assets/press/astro-icon-dark.svg" alt="Astro"
+                  class="skill-ext-icon" /></div>
+              <span class="skill-name">Astro</span>
+              <span class="skill-level level-basico">Básico</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 2 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-typescript-plain colored"></i></div>
+              <span class="skill-name">TypeScript</span>
+              <span class="skill-level level-basico">Básico</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 4 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-html5-plain colored"></i></div>
+              <span class="skill-name">HTML5</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-css3-plain colored"></i></div>
+              <span class="skill-name">CSS3</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año</span>
+            </div>
+          </div>
         </div>
 
-        <div class="card skill-item">
-          <i class="devicon-mysql-plain colored skill-icon-lg"></i>
-          <span class="skill-name">SQL / MySQL</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
+        <div class="skills-category reveal">
+          <h3 class="category-title"><i class="fas fa-wrench"></i> Herramientas & Otros</h3>
+          <div class="skills-grid">
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-git-plain colored"></i></div>
+              <span class="skill-name">Git & GitHub</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="devicon-postman-plain colored"></i></div>
+              <span class="skill-name">Postman</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 1 año</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><img
+                  src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" alt="Power BI"
+                  class="skill-ext-icon" /></div>
+              <span class="skill-name">Power BI</span>
+              <span class="skill-level level-intermedio">Intermedio</span>
+              <span class="skill-time"><i class="fas fa-clock"></i> 4 meses</span>
+            </div>
+            <div class="skill-card glass-card scale-in">
+              <div class="skill-icon-wrap"><i class="fas fa-users-cog"></i></div>
+              <span class="skill-name">Liderazgo TI</span>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <!-- Grupo 2: Frontend & Web -->
-      <h3 class="category-title" style="margin-top: 30px;">Frontend & Web</h3>
-      <div class="grid skills-grid">
-        
-        <div class="card skill-item">
-          <i class="devicon-javascript-plain colored skill-icon-lg"></i>
-          <span class="skill-name">JavaScript</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="devicon-react-original colored skill-icon-lg"></i>
-          <span class="skill-name">React + Vite</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-           <!-- Icono Astro (Imagen externa) -->
-           <img src="https://astro.build/assets/press/astro-icon-dark.svg" class="skill-icon-lg" alt="Astro" style="padding: 5px;" />
-          <span class="skill-name">Astro</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="devicon-typescript-plain colored skill-icon-lg"></i>
-          <span class="skill-name">TypeScript</span>
-          <span class="badge-level level-basico">Básico</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="devicon-html5-plain colored skill-icon-lg"></i>
-          <span class="skill-name">HTML5</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="devicon-css3-plain colored skill-icon-lg"></i>
-          <span class="skill-name">CSS3</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-      </div>
-
-      <!-- Grupo 3: Herramientas & Otros -->
-      <h3 class="category-title" style="margin-top: 30px;">Herramientas & Otros</h3>
-      <div class="grid skills-grid">
-
-        <div class="card skill-item">
-          <i class="devicon-git-plain colored skill-icon-lg"></i>
-          <span class="skill-name">Git & GitHub</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="devicon-postman-plain colored skill-icon-lg"></i>
-          <span class="skill-name">Postman</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-           <!-- Icono Power BI -->
-           <img src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg" class="skill-icon-lg" alt="Power BI" />
-          <span class="skill-name">Power BI</span>
-          <span class="badge-level level-intermedio">Intermedio</span>
-        </div>
-
-        <div class="card skill-item">
-          <i class="fas fa-users-cog skill-icon-lg" style="color: var(--primary);"></i>
-          <span class="skill-name">Liderazgo (Rol Practicante)</span>
-          <span class="badge-level level-intermedio">Experiencia Real</span>
+        <div class="skills-category reveal">
+          <h3 class="category-title"><i class="fas fa-handshake"></i> Soft Skills</h3>
+          <div class="skills-grid">
+            <div class="skill-card glass-card soft-skill-card scale-in">
+              <div class="skill-icon-wrap soft-icon"><i class="fas fa-users"></i></div>
+              <span class="skill-name">Colaboración</span>
+            </div>
+            <div class="skill-card glass-card soft-skill-card scale-in">
+              <div class="skill-icon-wrap soft-icon"><i class="fas fa-sync-alt"></i></div>
+              <span class="skill-name">Capacidad de Adaptación</span>
+            </div>
+            <div class="skill-card glass-card soft-skill-card scale-in">
+              <div class="skill-icon-wrap soft-icon"><i class="fas fa-hourglass-half"></i></div>
+              <span class="skill-name">Gestión del Tiempo</span>
+            </div>
+            <div class="skill-card glass-card soft-skill-card scale-in">
+              <div class="skill-icon-wrap soft-icon"><i class="fas fa-comments"></i></div>
+              <span class="skill-name">Comunicación Verbal y No Verbal</span>
+            </div>
+            <div class="skill-card glass-card soft-skill-card scale-in">
+              <div class="skill-icon-wrap soft-icon"><i class="fas fa-gem"></i></div>
+              <span class="skill-name">Cortesía Personal y Profesional</span>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -264,44 +438,363 @@
 
   </main>
 
+  <!-- ========== Footer ========== -->
   <footer class="footer">
-    <p>© 2026 Aladan Lazo — Portafolio Profesional</p>
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="brand-icon">&lt;/&gt;</span> Aladan<span class="brand-accent">Lazo</span>
+      </div>
+      <div class="footer-social">
+        <a href="https://github.com/Aladan2040" target="_blank" rel="noopener noreferrer" class="glow-hover"
+          title="GitHub"><i class="fab fa-github"></i></a>
+        <a href="https://linkedin.com/in/aladanlazo" target="_blank" rel="noopener noreferrer" class="glow-hover"
+          title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:faridlazo1921@gmail.com" class="glow-hover" title="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+      <p class="footer-copy">© 2026 Aladan Lazo — <span class="code-font">console.log("Hecho con ❤️")</span></p>
+    </div>
   </footer>
 
   <script>
-    (function() {
+    (function () {
+      'use strict';
+
       const root = document.documentElement;
-      const toggleBtn = document.getElementById('themeToggle');
-      const iconSpan = toggleBtn.querySelector('.icon');
-      const stored = localStorage.getItem('theme');
-      
-      // Función para aplicar tema
-      function setTheme(isDark) {
-        if (isDark) {
-          root.setAttribute('data-theme', 'dark');
-          iconSpan.textContent = '☀️';
-          localStorage.setItem('theme', 'dark');
-        } else {
-          root.removeAttribute('data-theme');
-          iconSpan.textContent = '🌙';
-          localStorage.setItem('theme', 'light');
+
+      /* ===================== THEME ===================== */
+      const themeBtn = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      function setTheme(dark) {
+        if (dark) { root.setAttribute('data-theme', 'dark'); themeIcon.className = 'fas fa-sun'; localStorage.setItem('theme', 'dark'); }
+        else { root.removeAttribute('data-theme'); themeIcon.className = 'fas fa-moon'; localStorage.setItem('theme', 'light'); }
+      }
+      setTheme(localStorage.getItem('theme') === 'dark');
+      themeBtn.addEventListener('click', () => setTheme(root.getAttribute('data-theme') !== 'dark'));
+
+      /* ===================== SCROLL PROGRESS ===================== */
+      const progressBar = document.getElementById('scrollProgress');
+      window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+        document.getElementById('navbar').classList.toggle('scrolled', scrollTop > 60);
+      });
+
+      /* ===================== HAMBURGER ===================== */
+      const hamburger = document.getElementById('hamburger');
+      const navLinks = document.getElementById('navLinks');
+      hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); });
+      navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('open'); }));
+
+      /* ===================== CIRCUIT BOARD CANVAS ===================== */
+      const canvas = document.getElementById('heroCanvas');
+      const ctx = canvas.getContext('2d');
+      const hero = document.getElementById('hero');
+      let mouse = { x: -9999, y: -9999 };
+      const SPACING = 50;
+      const ACTIVATE_RADIUS = 160;
+      const PULSE_SPEED = 2;
+      let nodes = [];
+      let pulses = [];
+      let cols, rows;
+
+      function resizeCanvas() {
+        canvas.width = hero.offsetWidth;
+        canvas.height = hero.offsetHeight;
+        initNodes();
+      }
+
+      function initNodes() {
+        nodes = [];
+        cols = Math.ceil(canvas.width / SPACING) + 1;
+        rows = Math.ceil(canvas.height / SPACING) + 1;
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            nodes.push({
+              x: c * SPACING,
+              y: r * SPACING,
+              col: c,
+              row: r,
+              activation: 0,
+              pulseGlow: 0
+            });
+          }
         }
       }
 
-      // Check inicial
-      if (stored === 'dark') {
-        setTheme(true);
-      } else {
-        setTheme(false);
+      function getNode(c, r) {
+        if (c < 0 || c >= cols || r < 0 || r >= rows) return null;
+        return nodes[r * cols + c];
       }
 
-      // Event Listener
-      toggleBtn.addEventListener('click', function() {
+      // Spawn pulse from a node to a random neighbor
+      function spawnPulse(fromNode) {
+        const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
+        const dir = dirs[Math.floor(Math.random() * dirs.length)];
+        const toNode = getNode(fromNode.col + dir[0], fromNode.row + dir[1]);
+        if (!toNode) return;
+        pulses.push({
+          x1: fromNode.x, y1: fromNode.y,
+          x2: toNode.x, y2: toNode.y,
+          progress: 0,
+          toCol: toNode.col, toRow: toNode.row,
+          life: 1
+        });
+      }
+
+      // Idle pulses
+      let idleTimer = 0;
+
+      function updateAndDraw() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         const isDark = root.getAttribute('data-theme') === 'dark';
-        setTheme(!isDark);
+
+        // Colors
+        const nodeColorInactive = isDark ? 'rgba(96, 165, 250, 0.08)' : 'rgba(37, 99, 235, 0.06)';
+        const nodeColorActive = isDark ? 'rgba(96, 165, 250, 0.9)' : 'rgba(37, 99, 235, 0.8)';
+        const lineColor = isDark ? 'rgba(96, 165, 250,' : 'rgba(37, 99, 235,';
+        const pulseColor = isDark ? 'rgba(34, 211, 238,' : 'rgba(6, 182, 212,';
+        const glowColor = isDark ? '#60a5fa' : '#2563eb';
+
+        // Update node activation based on mouse
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          const dx = n.x - mouse.x;
+          const dy = n.y - mouse.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const targetActivation = dist < ACTIVATE_RADIUS ? (1 - dist / ACTIVATE_RADIUS) : 0;
+          n.activation += (targetActivation - n.activation) * 0.12;
+          n.pulseGlow *= 0.92;
+        }
+
+        // Draw grid lines (faint)
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          const right = getNode(n.col + 1, n.row);
+          const down = getNode(n.col, n.row + 1);
+          const alpha = Math.max(n.activation * 0.4, 0.03);
+
+          if (right) {
+            const rightAlpha = Math.max(right.activation * 0.4, 0.03);
+            const avgAlpha = (alpha + rightAlpha) / 2;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(right.x, right.y);
+            ctx.strokeStyle = lineColor + avgAlpha + ')';
+            ctx.lineWidth = avgAlpha > 0.1 ? 1.5 : 0.5;
+            ctx.stroke();
+          }
+          if (down) {
+            const downAlpha = Math.max(down.activation * 0.4, 0.03);
+            const avgAlpha = (alpha + downAlpha) / 2;
+            ctx.beginPath();
+            ctx.moveTo(n.x, n.y);
+            ctx.lineTo(down.x, down.y);
+            ctx.strokeStyle = lineColor + avgAlpha + ')';
+            ctx.lineWidth = avgAlpha > 0.1 ? 1.5 : 0.5;
+            ctx.stroke();
+          }
+        }
+
+        // Draw nodes
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          const glow = Math.max(n.activation, n.pulseGlow);
+          const radius = 1.5 + glow * 3;
+
+          if (glow > 0.05) {
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, radius + 6, 0, Math.PI * 2);
+            ctx.fillStyle = lineColor + (glow * 0.2) + ')';
+            ctx.fill();
+          }
+
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = glow > 0.1 ? nodeColorActive : nodeColorInactive;
+          ctx.fill();
+        }
+
+        // Spawn mouse-triggered pulses
+        for (let i = 0; i < nodes.length; i++) {
+          const n = nodes[i];
+          if (n.activation > 0.5 && Math.random() < 0.02) {
+            spawnPulse(n);
+          }
+        }
+
+        // Idle pulses
+        idleTimer++;
+        if (idleTimer > 30 && mouse.x === -9999) {
+          idleTimer = 0;
+          const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
+          spawnPulse(randomNode);
+          randomNode.pulseGlow = 0.6;
+        }
+
+        // Update and draw pulses
+        for (let i = pulses.length - 1; i >= 0; i--) {
+          const p = pulses[i];
+          p.progress += PULSE_SPEED / SPACING;
+
+          if (p.progress >= 1) {
+            const endNode = getNode(p.toCol, p.toRow);
+            if (endNode) {
+              endNode.pulseGlow = Math.max(endNode.pulseGlow, 0.8);
+              // Chain reaction
+              if (Math.random() < 0.35) spawnPulse(endNode);
+            }
+            pulses.splice(i, 1);
+            continue;
+          }
+
+          const px = p.x1 + (p.x2 - p.x1) * p.progress;
+          const py = p.y1 + (p.y2 - p.y1) * p.progress;
+
+          // Glow trail
+          ctx.beginPath();
+          ctx.arc(px, py, 4, 0, Math.PI * 2);
+          ctx.fillStyle = pulseColor + '0.8)';
+          ctx.fill();
+
+          ctx.beginPath();
+          ctx.arc(px, py, 10, 0, Math.PI * 2);
+          ctx.fillStyle = pulseColor + '0.15)';
+          ctx.fill();
+
+          // Trail line
+          const trailStart = Math.max(0, p.progress - 0.4);
+          const tx = p.x1 + (p.x2 - p.x1) * trailStart;
+          const ty = p.y1 + (p.y2 - p.y1) * trailStart;
+          ctx.beginPath();
+          ctx.moveTo(tx, ty);
+          ctx.lineTo(px, py);
+          ctx.strokeStyle = pulseColor + '0.5)';
+          ctx.lineWidth = 2;
+          ctx.stroke();
+        }
+
+        requestAnimationFrame(updateAndDraw);
+      }
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      updateAndDraw();
+
+      hero.addEventListener('mousemove', e => {
+        const rect = hero.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
       });
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      // Touch support
+      hero.addEventListener('touchmove', e => {
+        const rect = hero.getBoundingClientRect();
+        mouse.x = e.touches[0].clientX - rect.left;
+        mouse.y = e.touches[0].clientY - rect.top;
+      }, { passive: true });
+      hero.addEventListener('touchend', () => { mouse.x = -9999; mouse.y = -9999; });
+
+      /* ===================== TYPING ===================== */
+      const phrases = ['Desarrollador Full Stack', 'Coordinador de TI', 'Spring Boot & React', 'Apasionado por el Código'];
+      const typingEl = document.getElementById('typingText');
+      let pIdx = 0, cIdx = 0, del = false;
+      function typeLoop() {
+        const cur = phrases[pIdx];
+        if (!del) {
+          typingEl.textContent = cur.substring(0, cIdx + 1);
+          cIdx++;
+          if (cIdx === cur.length) { del = true; setTimeout(typeLoop, 2200); return; }
+          setTimeout(typeLoop, 70);
+        } else {
+          typingEl.textContent = cur.substring(0, cIdx - 1);
+          cIdx--;
+          if (cIdx === 0) { del = false; pIdx = (pIdx + 1) % phrases.length; setTimeout(typeLoop, 400); return; }
+          setTimeout(typeLoop, 35);
+        }
+      }
+      setTimeout(typeLoop, 800);
+
+      /* ===================== SCROLL REVEAL ===================== */
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('revealed'); observer.unobserve(e.target); } });
+      }, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+      document.querySelectorAll('.reveal, .reveal-left, .scale-in, .section-header').forEach(el => observer.observe(el));
+
+      /* ===================== STAT COUNTER ===================== */
+      const statObs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            const el = e.target;
+            const target = parseInt(el.dataset.target);
+            let cur = 0;
+            const inc = target / 40;
+            const t = setInterval(() => {
+              cur += inc;
+              if (cur >= target) { cur = target; clearInterval(t); el.classList.add('counter-done'); }
+              el.textContent = Math.floor(cur);
+            }, 40);
+            statObs.unobserve(el);
+          }
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('.stat-number').forEach(el => statObs.observe(el));
+
+
+      /* ===================== MAGNETIC TILT ===================== */
+      document.querySelectorAll('.magnetic-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const r = card.getBoundingClientRect();
+          const x = e.clientX - r.left;
+          const y = e.clientY - r.top;
+          const cx = r.width / 2, cy = r.height / 2;
+          const rx = ((y - cy) / cy) * -8;
+          const ry = ((x - cx) / cx) * 8;
+          card.style.transform = `perspective(600px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.03)`;
+          // Light reflection
+          const lightX = (x / r.width) * 100;
+          const lightY = (y / r.height) * 100;
+          card.style.setProperty('--light-x', lightX + '%');
+          card.style.setProperty('--light-y', lightY + '%');
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.transform = 'perspective(600px) rotateX(0) rotateY(0) scale(1)';
+        });
+      });
+
+      /* ===================== PROJECT MODALS ===================== */
+      document.querySelectorAll('[data-modal]').forEach(card => {
+        card.addEventListener('click', () => {
+          const modal = document.getElementById(card.dataset.modal);
+          if (modal) {
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+      });
+
+      document.querySelectorAll('.modal-overlay').forEach(overlay => {
+        overlay.addEventListener('click', e => {
+          if (e.target === overlay || e.target.closest('.modal-close')) {
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+          }
+        });
+      });
+
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('.modal-overlay.active').forEach(m => {
+            m.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        }
+      });
+
     })();
   </script>
 
 </body>
+
 </html>
