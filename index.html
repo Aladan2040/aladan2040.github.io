@@ -16,6 +16,16 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
   <link rel="stylesheet" href="styles.css" />
+
+  <!-- Import Map para Three.js y Postprocessing -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://esm.sh/three@0.160.0",
+        "postprocessing": "https://esm.sh/postprocessing@6.35.0"
+      }
+    }
+  </script>
 </head>
 
 <body>
@@ -48,14 +58,14 @@
 
   <!-- ========== Hero ========== -->
   <header class="hero" id="hero">
-    <canvas id="heroCanvas"></canvas>
+    <div id="pixelBlastContainer" class="pixel-blast-container"></div>
     <div class="hero-content">
       <div class="hero-badge">
         <span class="badge-dot"></span> Disponible para nuevos proyectos
       </div>
       <h1 class="hero-title">
         <span class="hero-greeting">Hola, soy</span>
-        <span class="hero-name glitch-text" data-text="Aladan Lazo">Aladan Lazo</span>
+        <span class="hero-name glitch-text shiny-text" data-text="Aladan Lazo">Aladan Lazo</span>
       </h1>
       <p class="hero-subtitle">
         <span class="typing-prefix">&gt; </span><span id="typingText"></span><span class="typing-cursor">_</span>
@@ -87,33 +97,33 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-label"><i class="fas fa-terminal"></i> whoami</span>
-          <h2 class="section-title glitch-hover">Sobre mí</h2>
+          <h2 class="section-title glitch-hover shiny-text">Sobre mí</h2>
         </div>
         <div class="about-grid">
           <div class="about-card glass-card reveal">
-            <p class="about-text">
+            <p class="about-text split-text">
               Soy <strong>Desarrollador Full Stack</strong> egresado de <strong>Computación e Informática</strong>,
               apasionado por construir soluciones de software robustas y escalables.
               Trabajo con tecnologías como <strong>Java Spring Boot</strong>, <strong>PostgreSQL</strong> y
               <strong>React</strong>, desarrollando aplicaciones completas desde el diseño de base de datos
               hasta interfaces de usuario modernas.
             </p>
-            <p class="about-text">
+            <p class="about-text split-text">
               En mi experiencia profesional, gracias a mi desempeño fui designado como
               <strong>Líder de TI</strong>, donde lideré el avance del área tecnológica,
               supervisé equipos de desarrollo y gestioné la entrega de proyectos de software empresarial.
             </p>
           </div>
           <div class="about-stats">
-            <div class="stat-card glass-card reveal">
+            <div class="stat-card glass-card reveal spotlight-card">
               <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
               <span class="stat-label">Proyectos Completados</span>
             </div>
-            <div class="stat-card glass-card reveal">
+            <div class="stat-card glass-card reveal spotlight-card">
               <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
               <span class="stat-label">Tecnologías Dominadas</span>
             </div>
-            <div class="stat-card glass-card reveal">
+            <div class="stat-card glass-card reveal spotlight-card">
               <span class="stat-number" data-target="3">0</span><span class="stat-suffix">+</span>
               <span class="stat-label">Meses de Experiencia</span>
             </div>
@@ -127,7 +137,7 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-label"><i class="fas fa-code-branch"></i> git log</span>
-          <h2 class="section-title glitch-hover">Experiencia & Formación</h2>
+          <h2 class="section-title glitch-hover shiny-text">Experiencia & Formación</h2>
         </div>
         <div class="timeline">
           <div class="timeline-item reveal-left">
@@ -179,7 +189,7 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-label"><i class="fas fa-folder-open"></i> ls projects/</span>
-          <h2 class="section-title glitch-hover">Proyectos Destacados</h2>
+          <h2 class="section-title glitch-hover shiny-text">Proyectos Destacados</h2>
         </div>
         <div class="projects-grid">
 
@@ -302,7 +312,7 @@
       <div class="container">
         <div class="section-header reveal">
           <span class="section-label"><i class="fas fa-microchip"></i> cat skills.json</span>
-          <h2 class="section-title glitch-hover">Stack Tecnológico</h2>
+          <h2 class="section-title glitch-hover shiny-text">Stack Tecnológico</h2>
         </div>
 
         <div class="skills-category reveal">
@@ -466,6 +476,7 @@
       function setTheme(dark) {
         if (dark) { root.setAttribute('data-theme', 'dark'); themeIcon.className = 'fas fa-sun'; localStorage.setItem('theme', 'dark'); }
         else { root.removeAttribute('data-theme'); themeIcon.className = 'fas fa-moon'; localStorage.setItem('theme', 'light'); }
+        window.dispatchEvent(new CustomEvent('themeChanged', { detail: { dark } }));
       }
       setTheme(localStorage.getItem('theme') === 'dark');
       themeBtn.addEventListener('click', () => setTheme(root.getAttribute('data-theme') !== 'dark'));
@@ -485,215 +496,45 @@
       hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navLinks.classList.toggle('open'); });
       navLinks.querySelectorAll('a').forEach(l => l.addEventListener('click', () => { hamburger.classList.remove('active'); navLinks.classList.remove('open'); }));
 
-      /* ===================== CIRCUIT BOARD CANVAS ===================== */
-      const canvas = document.getElementById('heroCanvas');
-      const ctx = canvas.getContext('2d');
-      const hero = document.getElementById('hero');
-      let mouse = { x: -9999, y: -9999 };
-      const SPACING = 50;
-      const ACTIVATE_RADIUS = 160;
-      const PULSE_SPEED = 2;
-      let nodes = [];
-      let pulses = [];
-      let cols, rows;
-
-      function resizeCanvas() {
-        canvas.width = hero.offsetWidth;
-        canvas.height = hero.offsetHeight;
-        initNodes();
-      }
-
-      function initNodes() {
-        nodes = [];
-        cols = Math.ceil(canvas.width / SPACING) + 1;
-        rows = Math.ceil(canvas.height / SPACING) + 1;
-        for (let r = 0; r < rows; r++) {
-          for (let c = 0; c < cols; c++) {
-            nodes.push({
-              x: c * SPACING,
-              y: r * SPACING,
-              col: c,
-              row: r,
-              activation: 0,
-              pulseGlow: 0
-            });
-          }
-        }
-      }
-
-      function getNode(c, r) {
-        if (c < 0 || c >= cols || r < 0 || r >= rows) return null;
-        return nodes[r * cols + c];
-      }
-
-      // Spawn pulse from a node to a random neighbor
-      function spawnPulse(fromNode) {
-        const dirs = [[1, 0], [-1, 0], [0, 1], [0, -1]];
-        const dir = dirs[Math.floor(Math.random() * dirs.length)];
-        const toNode = getNode(fromNode.col + dir[0], fromNode.row + dir[1]);
-        if (!toNode) return;
-        pulses.push({
-          x1: fromNode.x, y1: fromNode.y,
-          x2: toNode.x, y2: toNode.y,
-          progress: 0,
-          toCol: toNode.col, toRow: toNode.row,
-          life: 1
+      /* ===================== SPOTLIGHT CARD ===================== */
+      document.querySelectorAll('.spotlight-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          card.style.setProperty('--mouse-x', `${x}px`);
+          card.style.setProperty('--mouse-y', `${y}px`);
         });
-      }
-
-      // Idle pulses
-      let idleTimer = 0;
-
-      function updateAndDraw() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        const isDark = root.getAttribute('data-theme') === 'dark';
-
-        // Colors
-        const nodeColorInactive = isDark ? 'rgba(96, 165, 250, 0.08)' : 'rgba(37, 99, 235, 0.06)';
-        const nodeColorActive = isDark ? 'rgba(96, 165, 250, 0.9)' : 'rgba(37, 99, 235, 0.8)';
-        const lineColor = isDark ? 'rgba(96, 165, 250,' : 'rgba(37, 99, 235,';
-        const pulseColor = isDark ? 'rgba(34, 211, 238,' : 'rgba(6, 182, 212,';
-        const glowColor = isDark ? '#60a5fa' : '#2563eb';
-
-        // Update node activation based on mouse
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-          const dx = n.x - mouse.x;
-          const dy = n.y - mouse.y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const targetActivation = dist < ACTIVATE_RADIUS ? (1 - dist / ACTIVATE_RADIUS) : 0;
-          n.activation += (targetActivation - n.activation) * 0.12;
-          n.pulseGlow *= 0.92;
-        }
-
-        // Draw grid lines (faint)
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-          const right = getNode(n.col + 1, n.row);
-          const down = getNode(n.col, n.row + 1);
-          const alpha = Math.max(n.activation * 0.4, 0.03);
-
-          if (right) {
-            const rightAlpha = Math.max(right.activation * 0.4, 0.03);
-            const avgAlpha = (alpha + rightAlpha) / 2;
-            ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(right.x, right.y);
-            ctx.strokeStyle = lineColor + avgAlpha + ')';
-            ctx.lineWidth = avgAlpha > 0.1 ? 1.5 : 0.5;
-            ctx.stroke();
-          }
-          if (down) {
-            const downAlpha = Math.max(down.activation * 0.4, 0.03);
-            const avgAlpha = (alpha + downAlpha) / 2;
-            ctx.beginPath();
-            ctx.moveTo(n.x, n.y);
-            ctx.lineTo(down.x, down.y);
-            ctx.strokeStyle = lineColor + avgAlpha + ')';
-            ctx.lineWidth = avgAlpha > 0.1 ? 1.5 : 0.5;
-            ctx.stroke();
-          }
-        }
-
-        // Draw nodes
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-          const glow = Math.max(n.activation, n.pulseGlow);
-          const radius = 1.5 + glow * 3;
-
-          if (glow > 0.05) {
-            ctx.beginPath();
-            ctx.arc(n.x, n.y, radius + 6, 0, Math.PI * 2);
-            ctx.fillStyle = lineColor + (glow * 0.2) + ')';
-            ctx.fill();
-          }
-
-          ctx.beginPath();
-          ctx.arc(n.x, n.y, radius, 0, Math.PI * 2);
-          ctx.fillStyle = glow > 0.1 ? nodeColorActive : nodeColorInactive;
-          ctx.fill();
-        }
-
-        // Spawn mouse-triggered pulses
-        for (let i = 0; i < nodes.length; i++) {
-          const n = nodes[i];
-          if (n.activation > 0.5 && Math.random() < 0.02) {
-            spawnPulse(n);
-          }
-        }
-
-        // Idle pulses
-        idleTimer++;
-        if (idleTimer > 30 && mouse.x === -9999) {
-          idleTimer = 0;
-          const randomNode = nodes[Math.floor(Math.random() * nodes.length)];
-          spawnPulse(randomNode);
-          randomNode.pulseGlow = 0.6;
-        }
-
-        // Update and draw pulses
-        for (let i = pulses.length - 1; i >= 0; i--) {
-          const p = pulses[i];
-          p.progress += PULSE_SPEED / SPACING;
-
-          if (p.progress >= 1) {
-            const endNode = getNode(p.toCol, p.toRow);
-            if (endNode) {
-              endNode.pulseGlow = Math.max(endNode.pulseGlow, 0.8);
-              // Chain reaction
-              if (Math.random() < 0.35) spawnPulse(endNode);
-            }
-            pulses.splice(i, 1);
-            continue;
-          }
-
-          const px = p.x1 + (p.x2 - p.x1) * p.progress;
-          const py = p.y1 + (p.y2 - p.y1) * p.progress;
-
-          // Glow trail
-          ctx.beginPath();
-          ctx.arc(px, py, 4, 0, Math.PI * 2);
-          ctx.fillStyle = pulseColor + '0.8)';
-          ctx.fill();
-
-          ctx.beginPath();
-          ctx.arc(px, py, 10, 0, Math.PI * 2);
-          ctx.fillStyle = pulseColor + '0.15)';
-          ctx.fill();
-
-          // Trail line
-          const trailStart = Math.max(0, p.progress - 0.4);
-          const tx = p.x1 + (p.x2 - p.x1) * trailStart;
-          const ty = p.y1 + (p.y2 - p.y1) * trailStart;
-          ctx.beginPath();
-          ctx.moveTo(tx, ty);
-          ctx.lineTo(px, py);
-          ctx.strokeStyle = pulseColor + '0.5)';
-          ctx.lineWidth = 2;
-          ctx.stroke();
-        }
-
-        requestAnimationFrame(updateAndDraw);
-      }
-
-      resizeCanvas();
-      window.addEventListener('resize', resizeCanvas);
-      updateAndDraw();
-
-      hero.addEventListener('mousemove', e => {
-        const rect = hero.getBoundingClientRect();
-        mouse.x = e.clientX - rect.left;
-        mouse.y = e.clientY - rect.top;
       });
-      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
-      // Touch support
-      hero.addEventListener('touchmove', e => {
-        const rect = hero.getBoundingClientRect();
-        mouse.x = e.touches[0].clientX - rect.left;
-        mouse.y = e.touches[0].clientY - rect.top;
-      }, { passive: true });
-      hero.addEventListener('touchend', () => { mouse.x = -9999; mouse.y = -9999; });
+      /* ===================== SPLIT TEXT / REVEAL ===================== */
+      function wrapWords(node) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const words = node.nodeValue.split(/(\s+)/);
+          const fragment = document.createDocumentFragment();
+          words.forEach(word => {
+            if (word.trim() === '') {
+              fragment.appendChild(document.createTextNode(word));
+            } else {
+              const span = document.createElement('span');
+              span.className = 'split-word';
+              span.textContent = word;
+              fragment.appendChild(span);
+            }
+          });
+          node.parentNode.replaceChild(fragment, node);
+        } else if (node.nodeType === Node.ELEMENT_NODE && node.nodeName !== 'SCRIPT' && node.nodeName !== 'STYLE') {
+          Array.from(node.childNodes).forEach(wrapWords);
+        }
+      }
+
+      document.querySelectorAll('.split-text').forEach(el => {
+        wrapWords(el);
+        let wordIndex = 0;
+        el.querySelectorAll('.split-word').forEach(span => {
+          span.style.setProperty('--word-index', wordIndex++);
+        });
+      });
 
       /* ===================== TYPING ===================== */
       const phrases = ['Desarrollador Full Stack', 'Coordinador de TI', 'Spring Boot & React', 'Apasionado por el Código'];
@@ -793,6 +634,307 @@
       });
 
     })();
+  </script>
+
+  <!-- Inicialización de PixelBlast -->
+  <script type="module">
+    import * as THREE from 'three';
+    import { Effect, EffectComposer, EffectPass, RenderPass } from 'postprocessing';
+
+    const createTouchTexture = () => {
+      const size = 64;
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const texture = new THREE.Texture(canvas);
+      texture.minFilter = THREE.LinearFilter;
+      texture.magFilter = THREE.LinearFilter;
+      texture.generateMipmaps = false;
+      const trail = [];
+      let last = null;
+      const maxAge = 64;
+      let radius = 0.1 * size;
+      const speed = 1 / maxAge;
+      
+      const clear = () => {
+        ctx.fillStyle = 'black';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+      };
+      
+      const drawPoint = p => {
+        const pos = { x: p.x * size, y: (1 - p.y) * size };
+        let intensity = 1;
+        const easeOutSine = t => Math.sin((t * Math.PI) / 2);
+        const easeOutQuad = t => -t * (t - 2);
+        if (p.age < maxAge * 0.3) intensity = easeOutSine(p.age / (maxAge * 0.3));
+        else intensity = easeOutQuad(1 - (p.age - maxAge * 0.3) / (maxAge * 0.7)) || 0;
+        intensity *= p.force;
+        const color = `${((p.vx + 1) / 2) * 255}, ${((p.vy + 1) / 2) * 255}, ${intensity * 255}`;
+        const offset = size * 5;
+        ctx.shadowOffsetX = offset;
+        ctx.shadowOffsetY = offset;
+        ctx.shadowBlur = radius;
+        ctx.shadowColor = `rgba(${color},${0.22 * intensity})`;
+        ctx.beginPath();
+        ctx.fillStyle = 'rgba(255,0,0,1)';
+        ctx.arc(pos.x - offset, pos.y - offset, radius, 0, Math.PI * 2);
+        ctx.fill();
+      };
+      
+      const addTouch = norm => {
+        let force = 0;
+        let vx = 0;
+        let vy = 0;
+        if (last) {
+          const dx = norm.x - last.x;
+          const dy = norm.y - last.y;
+          if (dx === 0 && dy === 0) return;
+          const dd = dx * dx + dy * dy;
+          const d = Math.sqrt(dd);
+          vx = dx / (d || 1);
+          vy = dy / (d || 1);
+          force = Math.min(dd * 10000, 1);
+        }
+        last = { x: norm.x, y: norm.y };
+        trail.push({ x: norm.x, y: norm.y, age: 0, force, vx, vy });
+      };
+      
+      const update = () => {
+        clear();
+        for (let i = trail.length - 1; i >= 0; i--) {
+          const point = trail[i];
+          const f = point.force * speed * (1 - point.age / maxAge);
+          point.x += point.vx * f;
+          point.y += point.vy * f;
+          point.age++;
+          if (point.age > maxAge) trail.splice(i, 1);
+        }
+        for (let i = 0; i < trail.length; i++) drawPoint(trail[i]);
+        texture.needsUpdate = true;
+      };
+      
+      return { canvas, texture, addTouch, update, set radiusScale(v) { radius = 0.1 * size * v; }, get radiusScale() { return radius / (0.1 * size); }, size };
+    };
+
+    const createLiquidEffect = (texture, opts) => {
+      const fragment = `
+        uniform sampler2D uTexture;
+        uniform float uStrength;
+        uniform float uTime;
+        uniform float uFreq;
+        void mainUv(inout vec2 uv) {
+          vec4 tex = texture2D(uTexture, uv);
+          float vx = tex.r * 2.0 - 1.0;
+          float vy = tex.g * 2.0 - 1.0;
+          float intensity = tex.b;
+          float wave = 0.5 + 0.5 * sin(uTime * uFreq + intensity * 6.2831853);
+          float amt = uStrength * intensity * wave;
+          uv += vec2(vx, vy) * amt;
+        }
+        `;
+      return new Effect('LiquidEffect', fragment, {
+        uniforms: new Map([
+          ['uTexture', new THREE.Uniform(texture)],
+          ['uStrength', new THREE.Uniform(opts?.strength ?? 0.025)],
+          ['uTime', new THREE.Uniform(0)],
+          ['uFreq', new THREE.Uniform(opts?.freq ?? 4.5)]
+        ])
+      });
+    };
+
+    const SHAPE_MAP = { square: 0, circle: 1, triangle: 2, diamond: 3 };
+
+    const VERTEX_SRC = `void main() { gl_Position = vec4(position, 1.0); }`;
+
+    const FRAGMENT_SRC = `
+    precision highp float;
+    uniform vec3  uColor;
+    uniform vec2  uResolution;
+    uniform float uTime;
+    uniform float uPixelSize;
+    uniform float uScale;
+    uniform float uDensity;
+    uniform float uPixelJitter;
+    uniform int   uEnableRipples;
+    uniform float uRippleSpeed;
+    uniform float uRippleThickness;
+    uniform float uRippleIntensity;
+    uniform float uEdgeFade;
+    uniform int   uShapeType;
+    const int SHAPE_SQUARE   = 0;
+    const int SHAPE_CIRCLE   = 1;
+    const int SHAPE_TRIANGLE = 2;
+    const int SHAPE_DIAMOND  = 3;
+    const int   MAX_CLICKS = 10;
+    uniform vec2  uClickPos  [MAX_CLICKS];
+    uniform float uClickTimes[MAX_CLICKS];
+    out vec4 fragColor;
+    
+    float Bayer2(vec2 a) { a = floor(a); return fract(a.x / 2. + a.y * a.y * .75); }
+    #define Bayer4(a) (Bayer2(.5*(a))*0.25 + Bayer2(a))
+    #define Bayer8(a) (Bayer4(.5*(a))*0.25 + Bayer2(a))
+    #define FBM_OCTAVES     5
+    #define FBM_LACUNARITY  1.25
+    #define FBM_GAIN        1.0
+    float hash11(float n){ return fract(sin(n)*43758.5453); }
+    float vnoise(vec3 p){
+      vec3 ip = floor(p); vec3 fp = fract(p);
+      float n000 = hash11(dot(ip + vec3(0.0,0.0,0.0), vec3(1.0,57.0,113.0)));
+      float n100 = hash11(dot(ip + vec3(1.0,0.0,0.0), vec3(1.0,57.0,113.0)));
+      float n010 = hash11(dot(ip + vec3(0.0,1.0,0.0), vec3(1.0,57.0,113.0)));
+      float n110 = hash11(dot(ip + vec3(1.0,1.0,0.0), vec3(1.0,57.0,113.0)));
+      float n001 = hash11(dot(ip + vec3(0.0,0.0,1.0), vec3(1.0,57.0,113.0)));
+      float n101 = hash11(dot(ip + vec3(1.0,0.0,1.0), vec3(1.0,57.0,113.0)));
+      float n011 = hash11(dot(ip + vec3(0.0,1.0,1.0), vec3(1.0,57.0,113.0)));
+      float n111 = hash11(dot(ip + vec3(1.0,1.0,1.0), vec3(1.0,57.0,113.0)));
+      vec3 w = fp*fp*fp*(fp*(fp*6.0-15.0)+10.0);
+      float x00 = mix(n000, n100, w.x); float x10 = mix(n010, n110, w.x);
+      float x01 = mix(n001, n101, w.x); float x11 = mix(n011, n111, w.x);
+      float y0  = mix(x00, x10, w.y);   float y1  = mix(x01, x11, w.y);
+      return mix(y0, y1, w.z) * 2.0 - 1.0;
+    }
+    float fbm2(vec2 uv, float t){
+      vec3 p = vec3(uv * uScale, t);
+      float amp = 1.0; float freq = 1.0; float sum = 1.0;
+      for (int i = 0; i < FBM_OCTAVES; ++i){ sum  += amp * vnoise(p * freq); freq *= FBM_LACUNARITY; amp  *= FBM_GAIN; }
+      return sum * 0.5 + 0.5;
+    }
+    float maskCircle(vec2 p, float cov){ float r = sqrt(cov) * .25; float d = length(p - 0.5) - r; float aa = 0.5 * fwidth(d); return cov * (1.0 - smoothstep(-aa, aa, d * 2.0)); }
+    float maskTriangle(vec2 p, vec2 id, float cov){ bool flip = mod(id.x + id.y, 2.0) > 0.5; if (flip) p.x = 1.0 - p.x; float r = sqrt(cov); float d  = p.y - r*(1.0 - p.x); float aa = fwidth(d); return cov * clamp(0.5 - d/aa, 0.0, 1.0); }
+    float maskDiamond(vec2 p, float cov){ float r = sqrt(cov) * 0.564; return step(abs(p.x - 0.49) + abs(p.y - 0.49), r); }
+    void main(){
+      float pixelSize = uPixelSize; vec2 fragCoord = gl_FragCoord.xy - uResolution * .5; float aspectRatio = uResolution.x / uResolution.y;
+      vec2 pixelId = floor(fragCoord / pixelSize); vec2 pixelUV = fract(fragCoord / pixelSize);
+      float cellPixelSize = 8.0 * pixelSize; vec2 cellId = floor(fragCoord / cellPixelSize); vec2 cellCoord = cellId * cellPixelSize; vec2 uv = cellCoord / uResolution * vec2(aspectRatio, 1.0);
+      float base = fbm2(uv, uTime * 0.05); base = base * 0.5 - 0.65;
+      float feed = base + (uDensity - 0.5) * 0.3;
+      float speed     = uRippleSpeed; float thickness = uRippleThickness; const float dampT     = 1.0; const float dampR     = 10.0;
+      if (uEnableRipples == 1) {
+        for (int i = 0; i < MAX_CLICKS; ++i){
+          vec2 pos = uClickPos[i]; if (pos.x < 0.0) continue;
+          float cellPixelSize = 8.0 * pixelSize; vec2 cuv = (((pos - uResolution * .5 - cellPixelSize * .5) / (uResolution))) * vec2(aspectRatio, 1.0);
+          float t = max(uTime - uClickTimes[i], 0.0); float r = distance(uv, cuv); float waveR = speed * t;
+          float ring  = exp(-pow((r - waveR) / thickness, 2.0)); float atten = exp(-dampT * t) * exp(-dampR * r);
+          feed = max(feed, ring * atten * uRippleIntensity);
+        }
+      }
+      float bayer = Bayer8(fragCoord / uPixelSize) - 0.5; float bw = step(0.5, feed + bayer);
+      float h = fract(sin(dot(floor(fragCoord / uPixelSize), vec2(127.1, 311.7))) * 43758.5453); float jitterScale = 1.0 + (h - 0.5) * uPixelJitter; float coverage = bw * jitterScale;
+      float M;
+      if      (uShapeType == SHAPE_CIRCLE)   M = maskCircle (pixelUV, coverage);
+      else if (uShapeType == SHAPE_TRIANGLE) M = maskTriangle(pixelUV, pixelId, coverage);
+      else if (uShapeType == SHAPE_DIAMOND)  M = maskDiamond(pixelUV, coverage);
+      else                                   M = coverage;
+      if (uEdgeFade > 0.0) { vec2 norm = gl_FragCoord.xy / uResolution; float edge = min(min(norm.x, norm.y), min(1.0 - norm.x, 1.0 - norm.y)); float fade = smoothstep(0.0, uEdgeFade, edge); M *= fade; }
+      vec3 color = uColor;
+      vec3 srgbColor = mix(color * 12.92, 1.055 * pow(color, vec3(1.0 / 2.4)) - 0.055, step(0.0031308, color));
+      fragColor = vec4(srgbColor, M);
+    }
+    `;
+
+    const MAX_CLICKS = 10;
+
+    class PixelBlast {
+      constructor(container, options = {}) {
+        this.container = container;
+        this.opts = { variant: 'circle', pixelSize: 6, color: '#B497CF', antialias: true, patternScale: 3, patternDensity: 1.2, pixelSizeJitter: 0.5, enableRipples: true, rippleSpeed: 0.4, rippleThickness: 0.12, rippleIntensityScale: 1.5, liquid: true, liquidStrength: 0.12, liquidRadius: 1.2, liquidWobbleSpeed: 5, speed: 0.6, edgeFade: 0.25, transparent: true, noiseAmount: 0, autoPauseOffscreen: true, ...options };
+        this.raf = 0; this.clickIx = 0; this.visible = true; this.init();
+      }
+
+      init() {
+        const { opts, container } = this;
+        this.canvas = document.createElement('canvas');
+        this.renderer = new THREE.WebGLRenderer({ canvas: this.canvas, antialias: opts.antialias, alpha: true, powerPreference: 'high-performance' });
+        this.renderer.domElement.style.width = '100%'; this.renderer.domElement.style.height = '100%';
+        this.renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        container.appendChild(this.renderer.domElement);
+        if (opts.transparent) this.renderer.setClearAlpha(0); else this.renderer.setClearColor(0x000000, 1);
+        this.uniforms = {
+          uResolution: { value: new THREE.Vector2(0, 0) }, uTime: { value: 0 }, uColor: { value: new THREE.Color(opts.color) },
+          uClickPos: { value: Array.from({ length: MAX_CLICKS }, () => new THREE.Vector2(-1, -1)) }, uClickTimes: { value: new Float32Array(MAX_CLICKS) },
+          uShapeType: { value: SHAPE_MAP[opts.variant] ?? 0 }, uPixelSize: { value: opts.pixelSize * this.renderer.getPixelRatio() }, uScale: { value: opts.patternScale },
+          uDensity: { value: opts.patternDensity }, uPixelJitter: { value: opts.pixelSizeJitter }, uEnableRipples: { value: opts.enableRipples ? 1 : 0 },
+          uRippleSpeed: { value: opts.rippleSpeed }, uRippleThickness: { value: opts.rippleThickness }, uRippleIntensity: { value: opts.rippleIntensityScale }, uEdgeFade: { value: opts.edgeFade }
+        };
+        this.scene = new THREE.Scene(); this.camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+        this.material = new THREE.ShaderMaterial({ vertexShader: VERTEX_SRC, fragmentShader: FRAGMENT_SRC, uniforms: this.uniforms, transparent: true, depthTest: false, depthWrite: false, glslVersion: THREE.GLSL3 });
+        this.quadGeom = new THREE.PlaneGeometry(2, 2); this.quad = new THREE.Mesh(this.quadGeom, this.material); this.scene.add(this.quad);
+        this.clock = new THREE.Clock();
+        this.setSize = () => {
+          const w = container.clientWidth || 1; const h = container.clientHeight || 1;
+          this.renderer.setSize(w, h, false); this.uniforms.uResolution.value.set(this.renderer.domElement.width, this.renderer.domElement.height);
+          if (this.composer) this.composer.setSize(this.renderer.domElement.width, this.renderer.domElement.height);
+          this.uniforms.uPixelSize.value = opts.pixelSize * this.renderer.getPixelRatio();
+        };
+        this.setSize(); this.ro = new ResizeObserver(this.setSize); this.ro.observe(container);
+        this.timeOffset = Math.random() * 1000;
+        if (opts.liquid) {
+          this.touch = createTouchTexture(); this.touch.radiusScale = opts.liquidRadius;
+          this.composer = new EffectComposer(this.renderer);
+          this.composer.addPass(new RenderPass(this.scene, this.camera));
+          this.liquidEffect = createLiquidEffect(this.touch.texture, { strength: opts.liquidStrength, freq: opts.liquidWobbleSpeed });
+          const effectPass = new EffectPass(this.camera, this.liquidEffect); effectPass.renderToScreen = true;
+          this.composer.addPass(effectPass);
+        }
+        this.mapToPixels = e => {
+          const rect = this.renderer.domElement.getBoundingClientRect(); const scaleX = this.renderer.domElement.width / rect.width; const scaleY = this.renderer.domElement.height / rect.height;
+          return { fx: (e.clientX - rect.left) * scaleX, fy: (rect.height - (e.clientY - rect.top)) * scaleY, w: this.renderer.domElement.width, h: this.renderer.domElement.height };
+        };
+        this.onPointerDown = e => { const { fx, fy } = this.mapToPixels(e); const ix = this.clickIx; this.uniforms.uClickPos.value[ix].set(fx, fy); this.uniforms.uClickTimes.value[ix] = this.uniforms.uTime.value; this.clickIx = (ix + 1) % MAX_CLICKS; };
+        this.onPointerMove = e => { if (!this.touch) return; const { fx, fy, w, h } = this.mapToPixels(e); this.touch.addTouch({ x: fx / w, y: fy / h }); };
+        this.renderer.domElement.addEventListener('pointerdown', this.onPointerDown, { passive: true }); this.renderer.domElement.addEventListener('pointermove', this.onPointerMove, { passive: true });
+        if (opts.autoPauseOffscreen) { this.intersectionObserver = new IntersectionObserver(entries => { this.visible = entries[0].isIntersecting; }, { threshold: 0 }); this.intersectionObserver.observe(container); }
+        this.animate = () => {
+          if (opts.autoPauseOffscreen && !this.visible) { this.raf = requestAnimationFrame(this.animate); return; }
+          this.uniforms.uTime.value = this.timeOffset + this.clock.getElapsedTime() * opts.speed;
+          if (this.liquidEffect) this.liquidEffect.uniforms.get('uTime').value = this.uniforms.uTime.value;
+          if (this.composer) {
+            if (this.touch) this.touch.update();
+            this.composer.passes.forEach(p => { if (p.effects) p.effects.forEach(eff => { const u = eff.uniforms?.get('uTime'); if (u) u.value = this.uniforms.uTime.value; }); });
+            this.composer.render();
+          } else { this.renderer.render(this.scene, this.camera); }
+          this.raf = requestAnimationFrame(this.animate);
+        };
+        this.raf = requestAnimationFrame(this.animate);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const container = document.getElementById('pixelBlastContainer');
+      if (container) {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const blast = new PixelBlast(container, {
+          variant: 'circle',
+          pixelSize: 6,
+          color: isDark ? '#8b5cf6' : '#4f46e5', /* Violet for dark, Indigo for light */
+          patternScale: 3,
+          patternDensity: 1.2,
+          pixelSizeJitter: 0.5,
+          enableRipples: true,
+          rippleSpeed: 0.4,
+          rippleThickness: 0.12,
+          rippleIntensityScale: 1.5,
+          liquid: true,
+          liquidStrength: 0.12,
+          liquidRadius: 1.2,
+          liquidWobbleSpeed: 5,
+          speed: 0.6,
+          edgeFade: 0.25,
+          transparent: true
+        });
+
+        window.addEventListener('themeChanged', (e) => {
+          const dark = e.detail.dark;
+          blast.opts.color = dark ? '#8b5cf6' : '#4f46e5';
+          if (blast.uniforms && blast.uniforms.uColor) {
+            blast.uniforms.uColor.value.set(blast.opts.color);
+          }
+        });
+      }
+    });
   </script>
 
 </body>
